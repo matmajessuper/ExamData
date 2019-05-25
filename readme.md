@@ -5,14 +5,27 @@ git clone https://github.com/matmajessuper/Exams.git
 ```
 - create virtualenv
 
-Available commands:
+- install required packages
+```
+pip install -r requirements.txt
+```
+- download data and upload to database "data.db"
+```
+python exams_data.py --get_data
+```
+- run script
+```
+python exams_data.py [OPTION] [FILTER]
+```
+
+with one of available options:
 - mean value of students attending exam in given territory from 2010 to given year
 ```
 --mean [TERRITORY] [YEAR]
 ```
 - passing percentage of given territory over years
 ```
---pass_percentage [TERRITORY]
+--passing_percentage [TERRITORY]
 ```
 - territory with best passing percentage in given year
 ```
@@ -25,10 +38,6 @@ Available commands:
 - compares two territories, which one had better passing percentage over the years
 ```
 --compare [TERRITORY1] [TERRITORY2]
-```
-- downloads data and uploads to database "data.db"
-```
---get_data
 ```
 - optional filter by sex, default for both
 ```
@@ -52,10 +61,16 @@ Available territories:
 - Lubelskie
 - Kujawsko-pomorskie
 - Dolnośląskie
+- Polska
 
 Available years:
 - 2010 - 2018
 
-Available sex:
+Available filters:
 - mężczyźni
 - kobiety
+
+To run test:
+```
+py.test tests.py
+```

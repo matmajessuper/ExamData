@@ -41,23 +41,28 @@ class TestExams(object):
         ex = Exams()
         ex.compare("Wielkopolskie", "Pomorskie")
         captured = capsys.readouterr()
-        assert captured.out == "2010 - Pomorskie\n2011 - Wielkopolskie\n2012 - Pomorskie\n2013 - Pomorskie\n2014 " \
-                               "- Pomorskie\n2015 - Pomorskie\n2016 - Pomorskie\n2017 - Pomorskie\n2018 - Wielkopolskie\n"
+        assert captured.out == "This territory had better passing percentage in year\n2010 " \
+                               "- Pomorskie\n2011 - Wielkopolskie\n2012 - Pomorskie\n2013 - Pomorskie\n2014 " \
+                               "- Pomorskie\n2015 - Pomorskie\n2016 - Pomorskie\n2017 - " \
+                               "Pomorskie\n2018 - Wielkopolskie\n"
 
     def test_detect_regression(self, capsys):
         ex = Exams()
         ex.detect_regression()
         captured = capsys.readouterr()
-        assert captured.out == "Dolnośląskie 2010 -> 2011\nDolnośląskie 2013 -> 2014\nDolnośląskie 2016 -> " \
+        assert captured.out == "These territories had regression in passing exams in year:\nPolska 2010 -> " \
+                               "2011\nPolska 2013 -> 2014\nPolska 2016 -> 2017\nDolnośląskie 2010" \
+                               " -> 2011\nDolnośląskie 2013 -> 2014\nDolnośląskie 2016 -> " \
                                "2017\nKujawsko-pomorskie 2010 -> 2011\nKujawsko-pomorskie 2013 -> " \
                                "2014\nKujawsko-pomorskie 2016 -> 2017\nLubelskie 2010 -> 2011\nLubelskie 2013 -> " \
                                "2014\nLubelskie 2016 -> 2017\nLubuskie 2010 -> 2011\nLubuskie 2013 -> 2014\nLubuskie " \
                                "2016 -> 2017\nLubuskie 2017 -> 2018\nŁódzkie 2010 -> 2011\nŁódzkie 2013 -> " \
-                               "2014\nŁódzkie 2016 -> 2017\nŁódzkie 2017 -> 2018\nMałopolskie 2010 -> 2011\nMałopolskie " \
-                               "2013 -> 2014\nMazowieckie 2010 -> 2011\nMazowieckie 2013 -> 2014\nMazowieckie 2016 -> " \
-                               "2017\nOpolskie 2010 -> 2011\nOpolskie 2013 -> 2014\nOpolskie 2016 -> 2017\nPodkarpackie " \
-                               "2010 -> 2011\nPodkarpackie 2013 -> 2014\nPodkarpackie 2016 -> 2017\nPodlaskie 2010 -> " \
-                               "2011\nPodlaskie 2013 -> 2014\nPodlaskie 2016 -> 2017\nPomorskie 2010 -> 2011\nPomorskie " \
+                               "2014\nŁódzkie 2016 -> 2017\nŁódzkie 2017 -> 2018\nMałopolskie 2010 -> " \
+                               "2011\nMałopolskie 2013 -> 2014\nMazowieckie 2010 -> 2011\nMazowieckie 2013 -> " \
+                               "2014\nMazowieckie 2016 -> 2017\nOpolskie 2010 -> 2011\nOpolskie 2013 -> " \
+                               "2014\nOpolskie 2016 -> 2017\nPodkarpackie 2010 -> 2011\nPodkarpackie 2013 -> " \
+                               "2014\nPodkarpackie 2016 -> 2017\nPodlaskie 2010 -> 2011\nPodlaskie 2013 -> " \
+                               "2014\nPodlaskie 2016 -> 2017\nPomorskie 2010 -> 2011\nPomorskie " \
                                "2013 -> 2014\nPomorskie 2016 -> 2017\nPomorskie 2017 -> 2018\nŚląskie 2010 -> " \
                                "2011\nŚląskie 2013 -> 2014\nŚląskie 2016 -> 2017\nŚwiętokrzyskie 2010 -> " \
                                "2011\nŚwiętokrzyskie 2013 -> 2014\nŚwiętokrzyskie 2016 -> 2017\nWarmińsko-Mazurskie " \
@@ -70,21 +75,22 @@ class TestExams(object):
         ex = Exams()
         ex.mean_values("Mazowieckie", 2018)
         captured = capsys.readouterr()
-        assert captured.out == "2010 - 2018  42462.444444444445\n"
+        assert captured.out == "Mean value of students attending exams in Mazowieckie\n2010 - 2018  42462.444444444445\n"
 
-    def test_percentage_passing(self, capsys):
+    def test_passing_percentage(self, capsys):
         ex = Exams()
-        ex.percentage_passing("Opolskie")
+        ex.passing_percentage("Opolskie")
         captured = capsys.readouterr()
-        assert captured.out == "2010 - 81.9641888225719%\n2011 - 74.93624772313296%\n2012 - 79.80964467005076%\n2013 " \
-                               "- 80.80194410692589%\n2014 - 69.85218791160544%\n2015 - 75.43914680050187%\n2016 " \
-                               "- 79.2014400261823%\n2017 - 77.6148904628562%\n2018 - 78.36962389778658%\n"
+        assert captured.out == "Passing percentage of Opolskie\n2010 - 81.9641888225719%\n2011 - " \
+                               "74.93624772313296%\n2012 - 79.80964467005076%\n2013 - 80.80194410692589%\n2014 " \
+                               "- 69.85218791160544%\n2015 - 75.43914680050187%\n2016 - 79.2014400261823%\n2017 " \
+                               "- 77.6148904628562%\n2018 - 78.36962389778658%\n"
 
     def test_best_in_year(self, capsys):
         ex = Exams()
         ex.best_in_year(2013)
         captured = capsys.readouterr()
-        assert captured.out == "2013 - wojewodztwo Małopolskie 83.5366055197488%\n"
+        assert captured.out == "Best passing percentage had:\n2013 - Małopolskie 83.5366055197488%\n"
 
 
 
